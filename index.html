@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#c8323f">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Warm-ups">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icon-192.png">
 <meta name="description" content="Play, Learn, Repeat! 12 interactive five-minute English warm-up games for A1–A2 kids, by Ms Ikram Boudaoud.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="English Warm-ups · A1–A2 Kids Level">
@@ -38,6 +46,7 @@ a{color:inherit}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{font:800 1rem var(--body);padding:9px 18px;border-radius:99px;border:3px solid var(--trench);background:transparent;color:var(--ink);cursor:pointer;transition:background .2s,color .2s}
 .chip[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+#inst{background:var(--red);color:#fff;border-color:var(--red-d)}
 .cat{margin:38px 0 14px;font:400 2rem var(--disp);color:var(--brown);display:flex;align-items:center;gap:14px}
 .cat:after{content:"";flex:1;height:4px;border-radius:4px;background:var(--trench)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
@@ -93,6 +102,7 @@ dialog iframe{flex:1;border:0;width:100%;background:#fff}
  <div class="tools">
   <input id="q" type="search" placeholder="Search a warm-up…" aria-label="Search warm-ups">
   <div class="chips" id="chips" role="group" aria-label="Filter by category"></div>
+  <button id="inst" class="chip" type="button" hidden>📲 Install the app</button>
  </div>
  <div id="list"></div>
  <p class="empty" id="empty">No warm-up matches. Clear the search or pick another category.</p>
@@ -176,6 +186,14 @@ WS.stop=function(){try{if(cur){cur.pause();cur.currentTime=0}}catch(e){}};
 WS.say=function(ok){if(WS.muted)return;try{var l=AU[ok?"good":"bad"],a=l[Math.floor(Math.random()*l.length)];
  if(l.length>1)while(a===lastA)a=l[Math.floor(Math.random()*l.length)];
  WS.stop();a.currentTime=0;var p=a.play();if(p&&p.catch)p.catch(function(){});cur=lastA=a}catch(e){}};
+var inst=$("inst"),dip=null,standalone=matchMedia("(display-mode: standalone)").matches||navigator.standalone,
+ ios=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+if(!standalone){if(ios)inst.hidden=false;
+ window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();dip=e;inst.hidden=false})}
+inst.onclick=function(){if(dip){dip.prompt();dip.userChoice.then(function(){dip=null;inst.hidden=true},function(){})}
+ else alert("To install: tap the Share button (the square with an arrow), then choose \u201cAdd to Home Screen\u201d.")};
+window.addEventListener("appinstalled",function(){inst.hidden=true});
+if("serviceWorker" in navigator&&/^https?:/.test(location.protocol))navigator.serviceWorker.register("sw.js").catch(function(){});
 render();
 </script>
 </body>
