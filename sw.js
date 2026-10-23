@@ -1,5 +1,5 @@
 /* Offline helper for English Warm-ups. Change the version number below when you publish a big update. */
-const V = 'warmups-v1';
+const V = 'warmups-v2';
 const CORE = ['index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png', 'preview.jpg'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(V).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));
