@@ -212,6 +212,7 @@ var W=[
 ["likes-dislikes","Everyday English","🦊","Likes & Dislikes","Say what you like and don't like.","A1","5"],
 ["cardinal-ordinal-numbers","Everyday English","🔢","Cardinal & Ordinal Numbers","Count with cardinals, order with ordinals.","A1","5"],
 ["phrasal-verbs","Everyday English","🔗","Phrasal Verbs","Match and use everyday phrasal verbs.","A2","5"],
+["will-or-going-to","Everyday English","✈️","Will or Going To","Choose will or going to for the future.","A1–A2","5"],
 ["class-phrases","Classroom Talk","🗣️","Class Phrases","Say useful classroom phrases in English.","A1","5"],
 ["opinion-vs-fact","Classroom Talk","💭","Opinion vs Fact","Fact or opinion? Decide and share your view.","A1","5"],
 ["class-phrases-speak","Classroom Talk","🎤","Class Phrases · Speak","Listen, then say the classroom phrase out loud.","A1","5"],
@@ -229,9 +230,8 @@ var W=[
 ["pronoun-power","Grammar & Tenses","💪","Pronoun Power","Match and quiz the subject and object pronouns.","A1","5"],
 ["expressing-likes-and-preferences","Compare Things","💖","Likes & Preferences","Say what you like and prefer, politely.","A1–A2","5"],
 ["comparatives","Compare Things","⚖️","Comparatives","Taller or more expensive?","A2","5"],
-["superlatives","Compare Things","🏆","Superlatives","The tallest or the most famous?","A2","5"],
-["will-or-going-to","General English","✈️","Will or Going To","Choose will or going to for the future.","A1–A2","5"]];
-var C={"Everyday English":"#c8323f","Classroom Talk":"#d99a2b","Grammar & Tenses":"#7d4f3c","Compare Things":"#a07f55","General English":"#4f7d5a"};
+["superlatives","Compare Things","🏆","Superlatives","The tallest or the most famous?","A2","5"]];
+var C={"Everyday English":"#c8323f","Classroom Talk":"#d99a2b","Grammar & Tenses":"#7d4f3c","Compare Things":"#a07f55"};
 var D=JSON.parse(document.getElementById("data").textContent),$=function(i){return document.getElementById(i)},cat="All",list=$("list");
 var cats=["All"].concat(Object.keys(C));
 $("chips").innerHTML=cats.map(function(c){return'<button class="chip" aria-pressed="'+(c=="All")+'" data-c="'+c+'">'+c+'</button>'}).join("");
